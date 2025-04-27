@@ -114,5 +114,4 @@ SFTdataset/
 
 📜 <font color="#00aa00">许可证</font>
 本项目遵循 MIT License。
-
-<p align="center"> ⭐ 如果你喜欢这个项目，记得给个 Star 支持一下！⭐ </p> 
+⭐ 如果你喜欢这个项目，记得给个 Star 支持一下！⭐ </p> 

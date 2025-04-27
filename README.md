@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://img.shields.io/badge/SFT%20Dataset-Supervised%20Fine-Tuning-brightgreen?style=flat-square" alt="SFTdataset">
+  <img src="https://img.shields.io/badge/SFT--Dataset-SFT%20Ready-brightgreen?style=flat-square" alt="SFTdataset Badge">
   <img src="https://img.shields.io/github/license/Jeffjeno/Build-my-miniLLM-from-scratch?style=flat-square" alt="License">
   <img src="https://img.shields.io/github/stars/Jeffjeno/Build-my-miniLLM-from-scratch?style=flat-square" alt="Stars">
 </p>

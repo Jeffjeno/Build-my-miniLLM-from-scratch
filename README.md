@@ -108,12 +108,26 @@ SFTdataset/
   "conclusion_fol": "has_never_experienced_heartbreak(Brecken)"
 }
 ```
-🤝 <font color="#00aa00">贡献方式</font>
+### 🤝 <font color="#00aa00">贡献方式</font>
 欢迎大家提 Issue 或 Pull Request 🎯
 请参阅我们的 贡献指南。
 
-📜 <font color="#00aa00">许可证</font>
+### 📜 <font color="#00aa00">许可证</font>
 本项目遵循 MIT License。
 
-⭐ <font color="#00aa00">Star</font>
+### ⭐ <font color="#00aa00">Star</font>
 如果你喜欢这个项目，记得给个 Star 支持一下！⭐ </p> 
+### 📚 <font color="#00aa00">参考来源 (References)</font>
+
+本项目部分灵感、方法和数据参考了以下优秀开源项目，特此致谢：
+
+- 🌿 [ProverGen: Large Language Models Meet Symbolic Provers for Logical Reasoning Evaluation](https://github.com/opendatalab/ProverGen)  
+  [ICLR 2025 Paper](https://openreview.net/forum?id=C25SgeXWjE)
+
+- 🌿 [MiniMind: Building Minimal and Effective Foundation Models from Scratch](https://github.com/jingyaogong/minimind)
+
+---
+
+> 📌 如果您在您的研究或项目中使用了本项目，欢迎引用或标注以上参考来源 ❤️
+---
+

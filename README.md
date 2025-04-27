@@ -1,143 +1,118 @@
-# <font color="green">Build-my-miniLLM-from-scratch</font>
+<p align="center">
+  <img src="https://img.shields.io/badge/SFT%20Dataset-Supervised%20Fine-Tuning-brightgreen?style=flat-square" alt="SFTdataset">
+  <img src="https://img.shields.io/github/license/Jeffjeno/Build-my-miniLLM-from-scratch?style=flat-square" alt="License">
+  <img src="https://img.shields.io/github/stars/Jeffjeno/Build-my-miniLLM-from-scratch?style=flat-square" alt="Stars">
+</p>
 
-> 从零构建可进行推理增强微调的微型大语言模型（MiniLLM）Pipeline
 
-## <font color="green">目录</font>
+<h1 align="center">🍀 <font color="#00aa00">SFTdataset</font> 🍀</h1>
 
-- [Build-my-miniLLM-from-scratch](#build-my-minillm-from-scratch)
-	- [目录](#目录)
-	- [项目简介](#项目简介)
-	- [目录结构](#目录结构)
-	- [环境要求](#环境要求)
-	- [快速开始](#快速开始)
-	- [数据准备](#数据准备)
-	- [模型预处理与初始化](#模型预处理与初始化)
-	- [推理增强方法集成](#推理增强方法集成)
-	- [训练阶段设计](#训练阶段设计)
-	- [推理阶段设计](#推理阶段设计)
-	- [模型评估与部署](#模型评估与部署)
-	- [贡献 \& 许可](#贡献--许可)
+<p align="center">
+🌿 Part of the <b>Build My Mini LLM from Scratch</b> Project 🌿
+</p>
 
-## <font color="green">项目简介</font>
+---
 
-本项目旨在从数据准备、模型初始化、推理增强、微调训练到模型评估与部署，构建一条完整的可复现的推理增强微调Pipeline。
+## 🌱 <font color="#00aa00">项目简介</font>
 
-## <font color="green">目录结构</font>
+本仓库用于存放 **Supervised Fine-Tuning (SFT)** 阶段使用的数据集，支持微调大型语言模型（LLMs），特别适配自定义推理、问答和思维链（CoT）任务。
 
-```text
-.
-├── trainer/               # 微调脚本和模型定义
-│   ├── train_lora.py
-│   └── model_lora.py
-├── scripts/               # 数据处理脚本
-│   └── dataset.py
-├── download.py            # 模型下载工具
-├── requirements.txt       # 依赖列表
-└── README.md              # 项目说明文档
-```
+---
 
-## <font color="green">环境要求</font>
+## ✨ <font color="#00aa00">功能亮点</font>
 
-- Python >= 3.8  
-- CUDA >= 11.1（GPU 加速）  
-- PyTorch >= 1.12  
+- 📚 **高质量数据**：涵盖推理、推断、思维链等任务
+- ⚙️ **灵活处理**：提供数据预处理脚本，可快速适配不同模型
+- 🚀 **无缝集成**：兼容 Transformers、PyTorch 等主流训练框架
+- 🛠️ **开放扩展**：支持新增任务类型与自定义数据增强
 
-安装依赖：
+---
+
+## 🚀 <font color="#00aa00">快速开始</font>
+
+### 1. 克隆仓库
+
 ```bash
+git clone https://github.com/Jeffjeno/Build-my-miniLLM-from-scratch.git
+cd Build-my-miniLLM-from-scratch/SFTdataset
+```
+2. 安装依赖
+```bash
+
 pip install -r requirements.txt
 ```
+3. 使用示例
+加载并预处理数据集：
 
-## <font color="green">快速开始</font>
+```python
 
-1. **下载基座模型**  
-   ```bash
-   python download.py \
-     --model_name Qwen/Qwen2.5-3B-Instruct \
-     --save_dir ./qwen2.5-3b-instruct
-   ```
+from sftdataset import load_dataset
+```
+# 加载数据
+```
+dataset = load_dataset("data/medium.json")
+```
+# 查看样本
+```
+print(dataset[0])
+```
+集成到 LLM 训练管道：
 
-2. **准备数据**  
-   将 SFT 数据集（JSON 格式）放入 `data/` 目录，保证格式为：
-   ```json
-   [
-     { "input": "问：...?", "output": "答：...", "loss_mask": [...] },
-     ...
-   ]
-   ```
+```python
 
-3. **LoRA 微调**  
-   ```bash
-   cd trainer
-   python train_lora.py \
-     --data_path ../data/total.json \
-     --out_dir ../output \
-     --batch_size 16 \
-     --learning_rate 5e-5 \
-     --epochs 50 \
-     --lora_name your_task_name \
-     --use_wandb
-   ```
+from transformers import Trainer, TrainingArguments
+```
+# 定义模型和训练参数
+```
+model = ...
+training_args = TrainingArguments(
+    output_dir="./results",
+    num_train_epochs=3,
+    per_device_train_batch_size=8,
+    save_steps=10,
+    save_total_limit=2,
+)
 
-## <font color="green">数据准备</font>
+trainer = Trainer(
+    model=model,
+    args=training_args,
+    train_dataset=dataset,
+)
 
-1. **数据集选择**  
-   - GSM8K、AQUA-RAT、StrategyQA 等  
-2. **格式转换 & CoT 标注**  
-   - 统一为 `问题 + 思维链 + 答案` 格式  
-3. **数据增强**  
-   - Self-Consistency、问题改写、跨数据集融合
+trainer.train()
+```
+📂 <font color="#00aa00">目录结构</font>
+```text
 
-## <font color="green">模型预处理与初始化</font>
+SFTdataset/
+├── data/               # 原始数据集（easy.json, medium.json, hard.json）
+├── processed_data/     # 预处理和分词后的数据
+├── scripts/            # 数据处理辅助脚本
+├── requirements.txt    # 项目依赖
+└── README.md           # 文档说明
+```
+📚 <font color="#00aa00">数据格式示例</font>
+```json
 
-1. **加载预训练模型**  
-2. **PEFT 配置（LoRA / QLoRA）**  
-3. **Tokenizer 处理 & Prompt 模板设计**
+{
+  "id": 0,
+  "options": ["A) True", "B) False", "C) Uncertain"],
+  "answer": "B",
+  "question": "Based on the above information, is the following statement true, false, or uncertain? Brecken has never experienced heartbreak.",
+  "reasoning": "fact1: Brecken has experienced heartbreak.\nrule: Either Brecken has experienced heartbreak or he has never experienced heartbreak, but not both.\nconclusion: Brecken has experienced heartbreak.\n\nTherefore, it is false that Brecken has never experienced heartbreak. The correct option is: B.",
+  "context": "Brecken has experienced heartbreak. Either Brecken has experienced heartbreak or he has never experienced heartbreak, but not both.",
+  "nl2fol": {
+    "Brecken has experienced heartbreak.": "has_experienced_heartbreak(Brecken)",
+    "Either Brecken has experienced heartbreak or he has never experienced heartbreak, but not both.": "has_experienced_heartbreak(Brecken) ⊕ has_never_experienced_heartbreak(Brecken)"
+  },
+  "conclusion_fol": "has_never_experienced_heartbreak(Brecken)"
+}
+```
+🤝 <font color="#00aa00">贡献方式</font>
+欢迎大家提 Issue 或 Pull Request 🎯
+请参阅我们的 贡献指南。
 
-## <font color="green">推理增强方法集成</font>
+📜 <font color="#00aa00">许可证</font>
+本项目遵循 MIT License。
 
-- **CoT 模仿学习**  
-- **知识蒸馏**  
-- **RLHF / GRPO / DPO**  
-- **Verifier 验证模型**  
-- **Self-Consistency / Tree-of-Thoughts**  
-- **ReAct 工具调用**  
-- **RAG 检索增强**
-
-## <font color="green">训练阶段设计</font>
-
-多阶段训练流程：
-1. SFT（监督微调）  
-2. RM（奖励模型训练，可选）  
-3. RL（PPO / DPO / GRPO 微调）
-
-结合 Loss 设计：
-- 交叉熵 + 思维链权重  
-- PPO 目标 + KL 惩罚  
-- DPO 偏好对比损失
-
-使用框架：
-- 🤗 Transformers + PEFT  
-- Hugging Face TRL  
-- DeepSpeed / DeepSpeed-Chat  
-- 混合精度 & DDP
-
-## <font color="green">推理阶段设计</font>
-
-- 解码策略：Temperature, Top-p, Stop tokens  
-- 自洽投票 & 验证器过滤  
-- 多路径生成（ToT）  
-- 工具 & 检索接口接入  
-- 性能优化：vLLM, 异步、批量
-
-## <font color="green">模型评估与部署</font>
-
-- **评估指标**：准确率、思维链质量、自洽性、鲁棒性、效率  
-- **评测工具**：LM Evaluation Harness, OpenCompass, AlpacaEval  
-- **部署架构**：FastAPI/vLLM 服务, 向量数据库, 工具路由  
-- **在线学习 & A/B 测试**  
-- **日志监控 & 反馈循环**
-
-## <font color="green">贡献 & 许可</font>
-
-欢迎提交 Issue/PR，或加入 Discussions 交流。  
-本项目采用 MIT 许可证，详见 [LICENSE](LICENSE)。
+<p align="center"> ⭐ 如果你喜欢这个项目，记得给个 Star 支持一下！⭐ </p> 

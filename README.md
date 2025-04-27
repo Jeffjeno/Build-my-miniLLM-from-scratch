@@ -1,9 +1,8 @@
-
-# Build-my-miniLLM-from-scratch
+# <font color="green">Build-my-miniLLM-from-scratch</font>
 
 > 从零构建可进行推理增强微调的微型大语言模型（MiniLLM）Pipeline
 
-## 目录
+## <font color="green">目录</font>
 
 - [Build-my-miniLLM-from-scratch](#build-my-minillm-from-scratch)
 	- [目录](#目录)
@@ -19,11 +18,11 @@
 	- [模型评估与部署](#模型评估与部署)
 	- [贡献 \& 许可](#贡献--许可)
 
-## 项目简介
+## <font color="green">项目简介</font>
 
 本项目旨在从数据准备、模型初始化、推理增强、微调训练到模型评估与部署，构建一条完整的可复现的推理增强微调Pipeline。
 
-## 目录结构
+## <font color="green">目录结构</font>
 
 ```text
 .
@@ -37,7 +36,7 @@
 └── README.md              # 项目说明文档
 ```
 
-## 环境要求
+## <font color="green">环境要求</font>
 
 - Python >= 3.8  
 - CUDA >= 11.1（GPU 加速）  
@@ -48,7 +47,7 @@
 pip install -r requirements.txt
 ```
 
-## 快速开始
+## <font color="green">快速开始</font>
 
 1. **下载基座模型**  
    ```bash
@@ -79,7 +78,7 @@ pip install -r requirements.txt
      --use_wandb
    ```
 
-## 数据准备
+## <font color="green">数据准备</font>
 
 1. **数据集选择**  
    - GSM8K、AQUA-RAT、StrategyQA 等  
@@ -88,13 +87,13 @@ pip install -r requirements.txt
 3. **数据增强**  
    - Self-Consistency、问题改写、跨数据集融合
 
-## 模型预处理与初始化
+## <font color="green">模型预处理与初始化</font>
 
 1. **加载预训练模型**  
 2. **PEFT 配置（LoRA / QLoRA）**  
 3. **Tokenizer 处理 & Prompt 模板设计**
 
-## 推理增强方法集成
+## <font color="green">推理增强方法集成</font>
 
 - **CoT 模仿学习**  
 - **知识蒸馏**  
@@ -104,7 +103,7 @@ pip install -r requirements.txt
 - **ReAct 工具调用**  
 - **RAG 检索增强**
 
-## 训练阶段设计
+## <font color="green">训练阶段设计</font>
 
 多阶段训练流程：
 1. SFT（监督微调）  
@@ -122,7 +121,7 @@ pip install -r requirements.txt
 - DeepSpeed / DeepSpeed-Chat  
 - 混合精度 & DDP
 
-## 推理阶段设计
+## <font color="green">推理阶段设计</font>
 
 - 解码策略：Temperature, Top-p, Stop tokens  
 - 自洽投票 & 验证器过滤  
@@ -130,7 +129,7 @@ pip install -r requirements.txt
 - 工具 & 检索接口接入  
 - 性能优化：vLLM, 异步、批量
 
-## 模型评估与部署
+## <font color="green">模型评估与部署</font>
 
 - **评估指标**：准确率、思维链质量、自洽性、鲁棒性、效率  
 - **评测工具**：LM Evaluation Harness, OpenCompass, AlpacaEval  
@@ -138,7 +137,7 @@ pip install -r requirements.txt
 - **在线学习 & A/B 测试**  
 - **日志监控 & 反馈循环**
 
-## 贡献 & 许可
+## <font color="green">贡献 & 许可</font>
 
 欢迎提交 Issue/PR，或加入 Discussions 交流。  
 本项目采用 MIT 许可证，详见 [LICENSE](LICENSE)。

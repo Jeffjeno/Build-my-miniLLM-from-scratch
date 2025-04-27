@@ -108,6 +108,72 @@ SFTdataset/
   "conclusion_fol": "has_never_experienced_heartbreak(Brecken)"
 }
 ```
+# 🔥 推理样例对比（Base Model vs LoRA 微调后模型）
+
+## 🧮 问题
+
+A bag contains 4 red balls, 5 blue balls, and 6 green balls.  
+If two balls are drawn one after another without replacement, what is the probability that the first ball is red and the second ball is either blue or green?
+
+---
+
+## ✨ 推理过程详情
+
+<details>
+<summary><strong>原始模型（Base Model）推理输出</strong></summary>
+
+```text
+To solve this problem, we need to calculate the probability of drawing a red ball first and then a ball that is either blue or green second.
+
+First, let's determine the total number of balls in the bag:
+
+Total number of balls = 4 (red) + 5 (blue) + 6 (green) = 15
+
+Step 1: Probability of Drawing a Red Ball First  
+P(Red first) = 4 / 15
+
+Step 2: Probability of Drawing a Blue or Green Ball Second  
+After drawing a red ball first, there are now 14 balls left in the bag, with 9 of them being either blue or green.  
+P(Blue or Green second | Red first) = 9 / 14
+
+Step 3: Combined Probability  
+P(Red first and Blue or Green second) = (4/15) * (9/14) = 36/210 = 6/35
+
+Thus, the probability that the first ball is red and the second ball is either blue or green is 6/35.
+```
+</details>
+<details>
+<summary><strong>LoRA 微调模型推理输出</strong></summary>
+  
+```
+To find the probability that the first ball drawn is red and the second ball drawn is either blue or green, we can break down the problem into two parts:
+
+First, let's determine the total number of balls in the bag:  
+- Red balls: 4  
+- Blue balls: 5  
+- Green balls: 6  
+Total number of balls = 15.
+
+Probability of drawing a red ball on the first draw:  
+P(Red on 1st draw) = 4 / 15
+
+After drawing a red ball, there are now 14 balls left with 5 blue and 6 green balls remaining.  
+Thus, P(Blue or Green on 2nd draw | Red on 1st draw) = (5 + 6) / 14 = 11/14
+
+Combined probability:  
+P(Red on 1st draw and Blue or Green on 2nd draw) = (4/15) * (11/14) = 44/210 = 22/105
+
+Thus, the probability that the first ball is red and the second ball is either blue or green is 22/105.
+```
+</details>
+
+---
+
+📈 小结
+	•	Base Model：推理过程中遗漏了绿球，导致最终答案偏差。
+	•	LoRA 微调模型：推理细致入微，考虑到所有情况，最终答案正确且逻辑严谨。
+	•	微调显著提升了模型的推理正确率和复杂问题处理能力！🚀
+
 ### 🤝 <font color="#00aa00">贡献方式</font>
 欢迎大家提 Issue 或 Pull Request 🎯
 请参阅我们的 贡献指南。

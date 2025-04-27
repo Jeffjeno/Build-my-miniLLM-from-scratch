@@ -1,0 +1,1 @@
+use the download.py to download Qwen 2.5 3b as base model
